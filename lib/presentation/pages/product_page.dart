@@ -15,21 +15,25 @@ class ProductPage extends StatelessWidget {
       body: ValueListenableBuilder<ProductState>(
         valueListenable: viewModel.state,
         builder: (context, state, _) {
-          if (state.isLoading) {
+          if (state.status == ProductUiStatus.loading) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          if (state.error != null) {
+          if (state.status == ProductUiStatus.error && state.error != null) {
             return Center(child: Text(state.error!));
           }
 
-          return ListView.builder(
-            itemCount: state.products.length,
-            itemBuilder: (context, index) {
-              final product = state.products[index];
-              return _ProductTile(product: product);
-            },
-          );
+          if (state.status == ProductUiStatus.success) {
+            return ListView.builder(
+              itemCount: state.products.length,
+              itemBuilder: (context, index) {
+                final product = state.products[index];
+                return _ProductTile(product: product);
+              },
+            );
+          }
+
+          return const SizedBox.shrink();
         },
       ),
       floatingActionButton: FloatingActionButton(

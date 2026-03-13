@@ -1,4 +1,4 @@
-name: mobile_arquitetura_01
+name: mobile_arquitetura_02
 description: App Flutter com arquitetura em camadas para listar produtos.
 publish_to: 'none'
 version: 1.0.0+1
@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^1.2.2
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:
